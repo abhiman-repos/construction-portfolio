@@ -13,27 +13,48 @@ export function AboutSection() {
   return (
     <section id="about" className="py-16 sm:py-20">
       <Container>
-        <div className="grid items-center gap-10 lg:grid-cols-2">
+        <div className="grid items-center gap-10 lg:gap-16">
           <div>
             <SectionHeading
               eyebrow={t("about.eyebrow")}
               title={t("about.title")}
               description={t("about.description")}
             />
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <span className="text-amber-400">✔</span>
+                Residential & Commercial Construction
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-amber-400">✔</span>
+                Interior & Finishing Work
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-amber-400">✔</span>
+                Renovation & Remodeling
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-amber-400">✔</span>
+                End-to-End Project Management
+              </div>
+            </div>
+            <p className="mt-8 text-base leading-relaxed text-muted-foreground">
               {t("about.body", { location: site.brand.location })}
             </p>
             <StatGrid
-              stats={stats.map((s) => ({ label: t(s.labelKey), value: s.value }))}
-              className="mt-8"
+              stats={stats.map((s) => ({
+                label: t(s.labelKey),
+                value: s.value,
+              }))}
+              className="mt-9"
             />
           </div>
 
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+          <div className="relative overflow-hidden rounded-3xl border border-border shadow-xl">
             <div className="absolute inset-0 bg-[radial-gradient(70%_80%_at_50%_0%,rgba(251,191,36,0.18),transparent_70%)]" />
-            <div className="relative aspect-[4/3]">
+            <div className="relative aspect-[4/2]">
               <Image
-                src="/hero.png"
+                src="/site-working.jpg"
                 alt=""
                 fill
                 className="object-cover opacity-80"
@@ -46,4 +67,3 @@ export function AboutSection() {
     </section>
   );
 }
-

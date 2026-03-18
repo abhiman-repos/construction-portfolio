@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, MapPin, Timer } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { ButtonLink } from "@/components/shared/Button";
 import { BeforeAfterSlider } from "@/components/shared/BeforeAfterSlider";
-import { DividerGlow } from "@/components/shared/DividerGlow";
 import { SiteHeader } from "@/components/shared/SiteHeader";
 import { SiteFooter } from "@/components/shared/SiteFooter";
 import { getProjectBySlug } from "@/lib/content/projects";
@@ -24,9 +23,34 @@ export default async function ProjectPage({
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
-      <main className="py-10 sm:py-14">
-        <Container>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <main className="pb-16">
+        {/* 🔥 HERO */}
+        <div className="relative h-[50vh] sm:h-[60vh] w-full overflow-hidden">
+          <Image
+            src={project.coverImage}
+            alt={project.name}
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/60" />
+
+          <Container className="relative z-10 flex h-full items-end pb-10">
+            <div className="text-white max-w-3xl">
+              <p className="text-xs uppercase tracking-wide text-amber-300">
+                {project.type}
+              </p>
+              <h1 className="mt-2 text-3xl sm:text-5xl font-bold">
+                {project.name}
+              </h1>
+              <p className="mt-3 text-white/80">{project.location}</p>
+            </div>
+          </Container>
+        </div>
+
+        <Container className="mt-10">
+          {/* 🔥 TOP ACTIONS */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
             <Link
               href="/#projects"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
@@ -37,7 +61,7 @@ export default async function ProjectPage({
 
             <ButtonLink
               href={buildWhatsAppLink(
-                `Hi! I’m interested in the project "${project.name}". Can you share estimate & timeline?`,
+                `Hi! I’m interested in "${project.name}". Please share estimate & timeline.`,
               )}
               size="sm"
             >
@@ -45,111 +69,124 @@ export default async function ProjectPage({
             </ButtonLink>
           </div>
 
-          <div className="mt-8 grid gap-8 lg:grid-cols-[1.4fr_0.6fr] lg:items-start">
-            <div>
-              <div className="rounded-3xl border border-border bg-card p-6">
-                <div className="text-xs font-medium tracking-wide text-amber-300/90">
-                  {project.type}
-                </div>
-                <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                  {project.name}
-                </h1>
-                <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                  {project.description}
+          {/* 🔥 MAIN GRID */}
+          <div className="mt-10 grid gap-10 lg:grid-cols-[1.5fr_0.5fr]">
+            {/* LEFT CONTENT */}
+            <div className="space-y-10">
+              {/* OVERVIEW */}
+              <div className="rounded-3xl border border-border p-6">
+                <h2 className="text-xl font-semibold">Project Overview</h2>
+                <p className="mt-4 text-muted-foreground leading-relaxed">
+                  {project.description || project.shortDescription}
                 </p>
-
-                <div className="mt-6 flex flex-wrap gap-3 text-xs text-muted-foreground">
-                  <div className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-3 py-1">
-                    <MapPin className="h-3.5 w-3.5 text-amber-300/80" />
-                    {project.location}
-                  </div>
-                  <div className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-3 py-1">
-                    <Timer className="h-3.5 w-3.5 text-amber-300/80" />
-                    {project.duration}
-                  </div>
-                  {project.year ? (
-                    <div className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-3 py-1">
-                      {project.year}
-                    </div>
-                  ) : null}
-                </div>
-
-                {project.images?.before && project.images?.after ? (
-                  <div className="mt-8">
-                    <div className="text-sm font-semibold text-foreground">
-                      Before / After
-                    </div>
-                    <div className="mt-3">
-                      <BeforeAfterSlider
-                        beforeSrc={project.images.before}
-                        afterSrc={project.images.after}
-                        alt={`${project.name} before and after`}
-                      />
-                    </div>
-                  </div>
-                ) : null}
-
-                {project.images?.gallery?.length ? (
-                  
-                  <div className="mt-10">
-                    <div className="text-sm font-semibold text-foreground">
-                      Gallery
-                    </div>
-                    <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                      {project.images.gallery.map((src) => (
-                        <div
-                          key={src}
-                          className="relative aspect-[16/11] overflow-hidden rounded-2xl border border-border bg-background"
-                        >
-                          <Image
-                            src={src}
-                            alt={`${project.name} photo`}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 420px"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : null}
               </div>
+
+              {/* 🔥 KEY INFO */}
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { label: "Client", value: project.client },
+                  { label: "Execution", value: project.executionModel },
+                  { label: "Duration", value: project.duration },
+                  { label: "Year", value: project.completionYear },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-xl border border-border p-4 bg-background/60"
+                  >
+                    <p className="text-xs text-muted-foreground">
+                      {item.label}
+                    </p>
+                    <p className="mt-1 font-semibold">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* 🔥 SCALE SECTION */}
+              <div className="rounded-3xl border border-border p-6">
+                <h2 className="text-xl font-semibold">Project Scale</h2>
+
+                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {Object.entries(project.scale).map(([key, value]) => (
+                    <div
+                      key={key}
+                      className="rounded-xl border border-border p-4 text-center"
+                    >
+                      <p className="text-xs text-muted-foreground capitalize">
+                        {key.replace(/([A-Z])/g, " $1")}
+                      </p>
+                      <p className="mt-2 font-semibold">{value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* BEFORE AFTER */}
+              {project.images?.before && project.images?.after && (
+                <div>
+                  <h2 className="text-xl font-semibold">Before / After</h2>
+                  <div className="mt-4">
+                    <BeforeAfterSlider
+                      beforeSrc={project.images.before}
+                      afterSrc={project.images.after}
+                      alt={project.name}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* GALLERY */}
+              {project.images?.gallery && (
+                <div>
+                  <h2 className="text-xl font-semibold">Gallery</h2>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    {project.images.gallery.map((src) => (
+                      <div
+                        key={src}
+                        className="relative aspect-[16/11] overflow-hidden rounded-2xl"
+                      >
+                        <Image
+                          src={src}
+                          alt={project.name}
+                          fill
+                          className="object-cover hover:scale-105 transition"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            <aside className="space-y-4">
-              <div className="rounded-3xl border border-border bg-card p-6">
-                <div className="text-sm font-semibold text-foreground">
-                  Project highlights
-                </div>
-                <DividerGlow className="my-4" />
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  {(project.highlights ?? []).map((h) => (
+            {/* RIGHT SIDEBAR */}
+            <aside className="space-y-6">
+              {/* HIGHLIGHTS */}
+              <div className="rounded-3xl border border-border p-6">
+                <h3 className="font-semibold">Key Highlights</h3>
+                <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+                  {project.highlights?.map((h) => (
                     <li key={h} className="flex gap-2">
-                      <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-amber-300/80" />
-                      <span>{h}</span>
+                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400" />
+                      {h}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="rounded-3xl border border-border bg-card p-6">
-                <div className="text-sm font-semibold text-foreground">
-                  Want something similar?
-                </div>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  Share your location, area (sqft), and timeline. We’ll respond with a
-                  clear estimate and plan.
+              {/* CTA */}
+              <div className="rounded-3xl border border-border p-6">
+                <h3 className="font-semibold">Want similar project?</h3>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Share location, area & timeline — we’ll send estimate.
                 </p>
-                <div className="mt-5">
-                  <ButtonLink
-                    href={buildWhatsAppLink(
-                      `Hi! I want a project like "${project.name}". Location: __, Area: __ sqft, Timeline: __.`,
-                    )}
-                    className="w-full"
-                  >
-                    WhatsApp for estimate <ArrowRight className="h-4 w-4" />
-                  </ButtonLink>
-                </div>
+
+                <ButtonLink
+                  href={buildWhatsAppLink(
+                    `Hi! I want a project like "${project.name}".`,
+                  )}
+                  className="mt-4 w-full"
+                >
+                  WhatsApp for estimate
+                </ButtonLink>
               </div>
             </aside>
           </div>
@@ -159,4 +196,3 @@ export default async function ProjectPage({
     </div>
   );
 }
-

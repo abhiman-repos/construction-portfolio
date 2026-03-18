@@ -5,7 +5,7 @@ import { Mail, Phone, Send } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Button } from "@/components/shared/Button";
-import { buildMailtoLink, buildTelLink, buildWhatsAppLink } from "@/lib/links";
+import { buildMailtoLink, buildTelLink } from "@/lib/links";
 import { site } from "@/lib/content/site";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
@@ -66,7 +66,7 @@ export function ContactSection() {
               className="grid gap-4"
               onSubmit={(e) => {
                 e.preventDefault();
-                window.open(buildWhatsAppLink(composed), "_blank", "noreferrer");
+                window.location.href = buildMailtoLink("Project enquiry", composed);
               }}
             >
               <div className="grid gap-2">

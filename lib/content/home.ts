@@ -9,9 +9,9 @@ import {
 } from "lucide-react";
 
 export const stats = [
-  { labelKey: "home.stats.projectsCompleted", value: "25+" },
-  { labelKey: "home.stats.yearsExperience", value: "3+" },
-  { labelKey: "home.stats.happyClients", value: "20+" },
+  { labelKey: "home.stats.projectsCompleted", value: "23+" },
+  { labelKey: "home.stats.yearsExperience", value: "19+" },
+  { labelKey: "home.stats.happyClients", value: "25+" },
 ] as const;
 
 export type Service = {

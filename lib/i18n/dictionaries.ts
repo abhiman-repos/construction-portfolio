@@ -107,8 +107,8 @@ export const dictionaries: Record<Language, Dictionary> = {
     "contact.form.messagePlaceholder":
       "Describe your project (location, budget range, timeline)...",
     "contact.form.helper":
-      "Prefer WhatsApp? Submit opens a chat with your message.",
-    "contact.form.submit": "Send on WhatsApp",
+      "Prefer email? Submit opens your email app with this message.",
+    "contact.form.submit": "Send by Email",
     "contact.whatsapp.composed":
       "Hi, I'm {{name}}. Phone: {{phone}}.\n\n{{message}}",
 
@@ -223,8 +223,8 @@ export const dictionaries: Record<Language, Dictionary> = {
     "contact.form.messagePlaceholder":
       "अपने प्रोजेक्ट के बारे में लिखें (लोकेशन, बजट रेंज, टाइमलाइन)...",
     "contact.form.helper":
-      "WhatsApp पसंद है? सबमिट करने पर आपके मैसेज के साथ चैट खुलेगी।",
-    "contact.form.submit": "WhatsApp पर भेजें",
+      "ईमेल पसंद है? सबमिट करने पर आपके मैसेज के साथ ईमेल ऐप खुलेगा।",
+    "contact.form.submit": "ईमेल से भेजें",
     "contact.whatsapp.composed":
       "नमस्ते, मेरा नाम {{name}} है। फोन: {{phone}}.\n\n{{message}}",
 
@@ -337,8 +337,8 @@ export const dictionaries: Record<Language, Dictionary> = {
     "contact.form.messagePlaceholder":
       "Apna project describe karo (location, budget range, timeline)...",
     "contact.form.helper":
-      "WhatsApp prefer? Submit karne par aapke message ke saath chat open hogi.",
-    "contact.form.submit": "WhatsApp par bhejo",
+      "Email prefer? Submit karne par aapke message ke saath email app open hogi.",
+    "contact.form.submit": "Email se bhejo",
     "contact.whatsapp.composed":
       "Hi, main {{name}}. Phone: {{phone}}.\n\n{{message}}",
 
