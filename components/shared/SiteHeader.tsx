@@ -9,10 +9,20 @@ import { site } from "@/lib/content/site";
 import { buildMailtoLink, buildTelLink } from "@/lib/links";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
+type NavItem = {
+  href: string;
+  label: string;
+  sub?: {
+    label: string;
+    slug?: string;
+    href?: string;
+  }[];
+};
+
 export function SiteHeader() {
   const { t } = useLanguage();
   const [open, setOpen] = React.useState(false);
-  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     if (!open) return;
@@ -23,25 +33,29 @@ export function SiteHeader() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  const nav = [
-  { href: "#about", label: t("nav.about") },
-  { href: "#projects", label: t("nav.projects") },
-  {
-    href: "#services",
-    label: t("nav.services"),
-    sub: [
-      "House Construction",
-      "Interior Design",
-      "Renovation",
-      "Commercial Projects",
-    ],
-  },
-  {
-    href: "#contact",
-    label: t("nav.contact"),
-    sub: ["Call Us", "Email", "Get Quote"],
-  },
-];
+  const nav: NavItem[] = [
+    { href: "#about", label: t("nav.about") },
+    { href: "#projects", label: t("nav.projects") },
+    {
+      href: "#services",
+      label: t("nav.services"),
+      sub: [
+        { label: "House Construction", slug: "house-construction" },
+        { label: "Interior Design", slug: "interior-design" },
+        { label: "Renovation", slug: "renovation" },
+        { label: "Commercial Projects", slug: "commercial-projects" },
+      ],
+    },
+    {
+      href: "#contact",
+      label: t("nav.contact"),
+      sub: [
+        { label: "Call Us", href: "#call" },
+        { label: "Email", href: "#email" },
+        { label: "Get Quote", href: "#quote" },
+      ],
+    },
+  ];
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/75 ">
@@ -66,15 +80,22 @@ export function SiteHeader() {
               {/* Dropdown */}
               {n.sub && (
                 <div className="absolute left-0 top-full mt-3 w-48 rounded-xl border border-border bg-background shadow-xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
-                  {n.sub.map((item, i) => (
-                    <a
-                      key={i}
-                      href="#"
-                      className="block px-4 py-2 text-sm text-foreground hover:bg-accent rounded-lg"
-                    >
-                      {item}
-                    </a>
-                  ))}
+                  {n.sub.map((item, i) => {
+                    const href =
+                      "slug" in item
+                        ? `/services/${item.slug}`
+                        : item.href || "#";
+
+                    return (
+                      <Link
+                        key={`${item.label}-${i}`} // ✅ FIXED
+                        href={href}
+                        className="block px-4 py-2 text-sm text-foreground hover:bg-accent rounded-lg"
+                      >
+                        {item.label}
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -133,16 +154,68 @@ export function SiteHeader() {
 
             <div className="p-4">
               <nav className="grid gap-1">
-                {nav.map((n) => (
-                  <a
-                    key={n.href}
-                    href={n.href}
-                    className="rounded-xl px-3 py-3 text-sm font-medium text-foreground hover:bg-accent transition"
-                    onClick={() => setOpen(false)}
-                  >
-                    {n.label}
-                  </a>
-                ))}
+                {nav.map((n) => {
+                  const isOpen = activeMenu === n.label;
+
+                  return (
+                    <div key={n.href}>
+                      {/* Main Item */}
+                      <button
+                        onClick={() =>
+                          n.sub
+                            ? setActiveMenu(isOpen ? null : n.label)
+                            : setOpen(false)
+                        }
+                        className="w-full flex items-center justify-between rounded-xl px-3 py-3 text-sm font-medium text-foreground hover:bg-accent transition"
+                      >
+                        {n.sub ? (
+                          <span>{n.label}</span>
+                        ) : (
+                          <Link href={n.href} className="w-full text-left">
+                            {n.label}
+                          </Link>
+                        )}
+
+                        {n.sub && (
+                          <span className="text-xs text-muted-foreground">
+                            {isOpen ? "−" : "+"}
+                          </span>
+                        )}
+                      </button>
+
+                      {/* Submenu */}
+                      {n.sub && (
+                        <div
+                          className={`ml-3 overflow-hidden transition-all duration-300 ${
+                            isOpen
+                              ? "max-h-60 opacity-100"
+                              : "max-h-0 opacity-0"
+                          }`}
+                        >
+                          <div className="mt-1 space-y-1">
+                            {n.sub.map((item, i) => {
+                              const href =
+                                "slug" in item
+                                  ? `/services/${item.slug}`
+                                  : item.href || "#";
+
+                              return (
+                                <Link
+                                  key={`${item.label}-${i}`}
+                                  href={href}
+                                  onClick={() => setOpen(false)}
+                                  className="block rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition"
+                                >
+                                  {item.label}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </nav>
 
               <div className="mt-6 grid gap-3">

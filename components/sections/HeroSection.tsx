@@ -16,7 +16,7 @@ export function HeroSection() {
   const heroImages = [
     "/hero.png",
     "/project1/project1.3.png",
-    "/hero3.png",
+    "/project2/project2.4.png",
     "/hero4.png",
     "/hero5.png",
   ];

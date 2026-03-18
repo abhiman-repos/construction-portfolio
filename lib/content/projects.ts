@@ -1,4 +1,11 @@
-export type ProjectType = "Residential" | "Commercial" | "Interior" | "Renovation" | "Institutional";
+export type ProjectType =
+  | "Residential"
+  | "Commercial"
+  | "Interior"
+  | "Renovation"
+  | "Institutional"
+  | "Hospital"
+  | "MarriageHall";
 
 export type Project = {
   id: number;
@@ -37,6 +44,54 @@ export const projects: Project[] = [
 
 {
   id: 1,
+  slug: "azamgarh-residential-duplex",
+  name: "Residential Duplex Home",
+  client: "Private Residence",
+  location: "Azamgarh, Uttar Pradesh",
+
+  projectType: "Residential Construction (G+1 Duplex)",
+  executionModel: "End-to-End Turnkey Construction",
+  type: "Residential",
+
+  duration: "6 Months",
+  completionYear: "2021",
+  status: "Completed",
+
+  scale: {
+    totalBuiltUpArea: "3,000 sq. ft.",
+    mainBlock: "Ground Floor + First Floor (G+1 Structure)",
+    academicBlock: "N/A",
+    supportUnit: "Balcony, Parking Area & Staircase Block",
+  },
+
+  shortDescription:
+    "A well-designed G+1 residential duplex featuring modern elevation, spacious balconies, and durable RCC construction with aesthetic exterior detailing.",
+
+  description:
+    "This project is a fully customized G+1 residential duplex constructed with a strong RCC framework and functional architectural planning. The design focuses on maximizing space utilization, ventilation, and natural lighting. The structure includes spacious balconies with decorative railings, a covered entrance supported by columns, and a well-balanced front elevation. High-quality materials were used for durability, along with aesthetic exterior color combinations to enhance visual appeal. The project was completed within 6 months with a focus on structural strength, clean finishing, and long-term usability.",
+
+  coverImage: "/hero.png",
+
+  images: {
+    gallery: [
+      "/hero.png",
+    ],
+  },
+
+  highlights: [
+    "Strong RCC framed G+1 structure ensuring long-term durability",
+    "Spacious front elevation with dual-side balconies",
+    "Decorative metal railings with modern geometric design",
+    "Covered entrance porch with column support",
+    "Optimized natural lighting and cross ventilation",
+    "Balanced layout for family living with functional zoning",
+    "Attractive exterior color combination enhancing visual appeal",
+  ],
+
+  tags: ["Residential", "Duplex", "RCC Structure", "Modern Elevation"],
+},
+{
+  id: 2,
   slug: "shree-sharda-pg-college-khuraampur",
   type:"Institutional",
   name: "Shree Sharda P.G. College",
@@ -57,7 +112,7 @@ export const projects: Project[] = [
   },
 
   shortDescription: "A massive multi-floor institutional campus featuring three distinct blocks. Executed with robust RCC framing, brickwork, POP finishing, and sustainable natural lighting. Final color finishes are currently pending client selection.",
-  description: "",
+  description: "Executed over a rigorous Eight-year timeline, the Shree Sharda P.G. College project demonstrates our capability in handling specialized institutional infrastructure. This 44,000 sq. ft. turnkey execution involved the complete overhaul and integration of highly technical academic laboratories, a dedicated corporate-style administrative wing, and complex utility support areas. Our team successfully managed the intricate MEP (Mechanical, Electrical, and Plumbing) requirements essential for safe lab environments, alongside acoustic treatments for meeting rooms and heavy-duty flooring designed for high student footfall. The result is a seamless, modern, and compliance-ready educational facility.",
   coverImage: "/project1/project1.1.png",
   images: {
     before: "/project1/before.png",
@@ -83,89 +138,62 @@ export const projects: Project[] = [
   tags: ["Institutional", "RCC Structure", "Sustainable Design", "Turnkey"]
 },
   {
-  id: 2,
-  slug: "Baba-Vishwanath-Institute-of-Technology-Martinganj",
+  id: 3,
+  slug: "baba-vishwanath-institute-of-technology-martinganj",
   name: "Baba Vishwanath Institute of Technology",
   client: "Vishwanath Educational Trust",
   location: "Martinganj",
-  projectType: "Commercial Renovation",
-  executionModel: "Turnkey Interior Renovation",
-  type: "Renovation",
-
+  projectType: "Institutional Renovation & Upgrade",
+  executionModel: "Turnkey Interior & Infrastructure Execution",
+  type: "Institutional",
   duration: "2 years",
   completionYear: "2014",
   status: "Completed",
 
+  // (Your data up to here remains exactly as you provided)
   scale: {
     totalBuiltUpArea: "12,500 sq. ft.",
-    mainBlock: "Office Workspace",
-    academicBlock: "N/A",
-    supportUnit: "Meeting + Utility Areas",
+    mainBlock: "Office & Administrative Workspace",
+    academicBlock: "N/A", // Handled within support units for this specific scale
+    supportUnit: "Technical Laboratories, Meeting Rooms & Utility Areas",
   },
 
+  // --- UPDATED SECTIONS FOR BIG CLIENT PITCH ---
+
   shortDescription:
-    "Fast-track office renovation with modern interiors, lighting, and workspace optimization.",
+    "A comprehensive 12,500 sq. ft. institutional upgrade, featuring high-precision technical laboratories, modern administrative zones, and robust MEP infrastructure tailored for technical education.",
 
   description:
-    "A fast-track commercial renovation project executed with minimal downtime. Included flooring upgrades, glass partitions, modern lighting, and a clean corporate finish.",
+    "Executed over a rigorous two-year timeline, the Baba Vishwanath Institute of Technology project demonstrates our capability in handling specialized institutional infrastructure. This 12,500 sq. ft. turnkey execution involved the complete overhaul and integration of highly technical academic laboratories, a dedicated corporate-style administrative wing, and complex utility support areas. Our team successfully managed the intricate MEP (Mechanical, Electrical, and Plumbing) requirements essential for safe lab environments, alongside acoustic treatments for meeting rooms and heavy-duty flooring designed for high student footfall. The result is a seamless, modern, and compliance-ready educational facility.",
 
-  coverImage: "/hero.png",
+  coverImage: "/project2/project2.4.png",
 
   images: {
-    gallery: ["/hero.png", "/hero.png"],
+    gallery: [
+      "/project2/project2.4.png", 
+      "/project2/project2.1.png", 
+      "/project2/project22.png", 
+      "/project2/project2.3.png"
+    ],
   },
 
   highlights: [
-    "Minimal downtime execution plan",
-    "Electrical + lighting upgrade",
-    "Glass partitions + acoustic treatment",
-    "Handover cleaning + punch list closure",
+    "Specialized Laboratory Execution: Custom MEP routing (plumbing, gas, electrical) for high-compliance technical and science labs.",
+    "Institutional Durability: Installation of heavy-duty, high-footfall flooring and robust interior finishes built to withstand daily student use.",
+    "Acoustic & Workspace Optimization: Premium glass partitions and sound-dampening treatments deployed in administrative and meeting zones.",
+    "Advanced Electrical & Lighting: Upgraded load-bearing electrical panels and eye-friendly, high-lumen lighting systems for extended study hours.",
+    "Safety & Utility Integration: Turnkey setup of critical support units, fire-safety compliance planning, and seamless punch-list closure."
   ],
 
-  tags: ["Commercial", "Renovation", "Fast-track"],
-},
-{
-  id: 3,
-  slug: "azure-interiors",
-  name: "Azure Interiors",
-  client: "Residential Client",
-  location: "Bhopal",
-  projectType: "Interior Design & Execution",
-  executionModel: "Custom Interior Work",
-  type: "Interior",
-
-  duration: "6 Weeks",
-  completionYear: "2025",
-  status: "Completed",
-
-  scale: {
-    totalBuiltUpArea: "1,800 sq. ft.",
-    mainBlock: "Living + Bedroom",
-    academicBlock: "N/A",
-    supportUnit: "Kitchen + Storage",
-  },
-
-  shortDescription:
-    "Premium home interior upgrade with custom carpentry, textures, and lighting.",
-
-  description:
-    "A residential interior transformation project featuring custom furniture, wardrobe optimization, textured walls, and layered lighting design for a premium living experience.",
-
-  coverImage: "/hero.png",
-
-  images: {
-    gallery: ["/hero.png", "/hero.png", "/hero.png"],
-  },
-
-  highlights: [
-    "Custom TV unit + paneling",
-    "Wardrobe optimization + accessories",
-    "Premium texture paint finish",
-    "Warm/cool lighting zones",
+  tags: [
+    "Institutional", 
+    "Laboratory Infrastructure", 
+    "Turnkey Upgrades", 
+    "Educational Facility"
   ],
-
-  tags: ["Interior", "Carpentry", "Lighting"],
 },
+
+
 ]
 
 export function getProjectBySlug(slug: string) {

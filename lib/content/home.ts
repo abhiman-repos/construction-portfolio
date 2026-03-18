@@ -15,30 +15,35 @@ export const stats = [
 ] as const;
 
 export type Service = {
-  titleKey: string;
-  descriptionKey: string;
+  slug: string;
+  title: string;
+  description: string;
   icon: LucideIcon;
 };
 
 export const services: Service[] = [
   {
-    titleKey: "home.services.house.title",
-    descriptionKey: "home.services.house.description",
+    slug: "house-construction",
+    title: "home.services.house.title",
+    description: "home.services.house.description",
     icon: Home,
   },
   {
-    titleKey: "home.services.renovation.title",
-    descriptionKey: "home.services.renovation.description",
+    slug: "renovation",
+    title: "home.services.renovation.title",
+    description: "home.services.renovation.description",
     icon: Wrench,
   },
   {
-    titleKey: "home.services.interior.title",
-    descriptionKey: "home.services.interior.description",
+    slug: "interior-design",
+    title: "home.services.interior.title",
+    description: "home.services.interior.description",
     icon: Paintbrush2,
   },
   {
-    titleKey: "home.services.commercial.title",
-    descriptionKey: "home.services.commercial.description",
+    slug: "commercial-projects",
+    title: "home.services.commercial.title",
+    description: "home.services.commercial.description",
     icon: Building2,
   },
 ];
