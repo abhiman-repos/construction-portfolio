@@ -17,12 +17,12 @@ export default async function ServicePage({
   if (!service) return notFound();
 
   return (
-    <div className="bg-background text-foreground">
+    <div className="bg-gradient-to-r from-amber-20/10 to-transparent p-10 text-foreground">
       {/* 🔥 HERO (SPLIT) */}
       <section className="relative py-24">
         <div className="absolute inset-0">
           <Image
-            src="/hero.png"
+            src="/hero.jpeg"
             alt=""
             fill
             className="object-cover opacity-30"
@@ -44,7 +44,7 @@ export default async function ServicePage({
 
               <ButtonLink
                 href="#process"
-                className="border border-border bg-transparent"
+                className="border border-border "
               >
                 View Process
               </ButtonLink>
@@ -89,32 +89,6 @@ export default async function ServicePage({
         </Container>
       </section>
 
-      <section className="py-20">
-        <Container>
-          <h2 className="text-3xl font-semibold text-center">
-            Our Work Process
-          </h2>
-
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              "Foundation Work",
-              "RCC Structure",
-              "Brickwork",
-              "Finishing",
-              "Painting",
-              "Final Delivery",
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="rounded-2xl overflow-hidden border border-border"
-              >
-                <div className="h-40 bg-muted" />
-                <div className="p-4 text-sm">{item}</div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
 
       {/* 🔥 CTA (BIG CONVERSION SECTION) */}
       <section className="py-24">
@@ -132,7 +106,7 @@ export default async function ServicePage({
 
               <ButtonLink
                 href="#"
-                className="bg-transparent border border-border"
+                className=" border border-border"
               >
                 Call Now
               </ButtonLink>

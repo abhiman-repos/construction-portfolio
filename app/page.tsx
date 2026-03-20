@@ -22,9 +22,7 @@ export default function Home() {
         <ProjectsSection />
         <ServicesSection />
         <WhyChooseUsSection />
-        <TestimonialsSection />
         <SettingsSection />
-        <ContactSection />
       </main>
       <SiteFooter />
       <FloatingWhatsApp />

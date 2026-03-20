@@ -152,7 +152,7 @@ export function SiteHeader() {
               </button>
             </div>
 
-            <div className="p-4">
+            <div className="p-4 ">
               <nav className="grid gap-1">
                 {nav.map((n) => {
                   const isOpen = activeMenu === n.label;

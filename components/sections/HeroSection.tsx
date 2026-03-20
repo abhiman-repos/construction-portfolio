@@ -31,22 +31,10 @@ export function HeroSection() {
   }, [heroImages.length]);
 
   return (
-    <section className="relative py-16 sm:py-20 overflow-hidden">
-      {/* ✅ SLIDER (FIXED) */}
+    <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
+      {/* SLIDER */}
       {heroImages.map((src, index) => {
         const isActive = index === current;
-
-        // 🎨 Different animations per image
-        const animations = [
-          isActive ? "opacity-100 scale-110" : "opacity-0 scale-100", // zoom
-          isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-20", // slide right
-          isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20", // slide up
-          isActive
-            ? "opacity-100 scale-105 rotate-1"
-            : "opacity-0 scale-100 rotate-0", // slight rotate
-          isActive ? "opacity-100 blur-0" : "opacity-0 blur-sm",
-          isActive ? "scale-110" : "scale-105" // blur fade
-        ];
 
         return (
           <Image
@@ -55,42 +43,45 @@ export function HeroSection() {
             alt="hero"
             fill
             priority={index === 0}
-            className={`object-cover object-center transition-all duration-1000 ease-in-out ${
-              animations[index % animations.length]
+            className={`object-cover object-center transition-all duration-[1200ms] ease-in-out ${
+              isActive ? "opacity-100 scale-105" : "opacity-0 scale-110"
             }`}
           />
         );
       })}
 
-      {/* Overlay */}
+      {/* DARK OVERLAY */}
       <div className="absolute inset-0 bg-black/60" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
-      {/* Content */}
+      {/* LEFT GRADIENT (AMAZON STYLE) */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
+
+      {/* CONTENT */}
       <Container className="relative z-10 flex h-full items-center">
         <div className="max-w-2xl text-white">
-          {/* Location */}
+          {/* LOCATION */}
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs backdrop-blur-md">
             <span className="h-2 w-2 rounded-full bg-amber-400" />
             {site.brand.location}
           </div>
 
-          {/* Heading */}
-          <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-6xl">
+          {/* HEADING */}
+          <h1 className="mt-6 text-4xl sm:text-6xl font-bold leading-tight">
             {t("hero.tagline")}
           </h1>
 
-          {/* Description */}
-          <p className="mt-5 text-white/80 text-lg">{t("hero.description")}</p>
+          {/* DESCRIPTION */}
+          <p className="mt-5 text-white/80 text-lg max-w-xl">
+            {t("hero.description")}
+          </p>
 
           {/* CTA */}
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <ButtonLink
               href={buildMailtoLink("Free construction consultation")}
-              className="bg-amber-400 text-black hover:bg-amber-300"
+              className="bg-amber-400 text-black hover:bg-amber-300 px-6 py-3 text-sm font-semibold"
             >
               {t("hero.cta.consultation")}
-              <ArrowRight className="ml-1 h-4 w-4" />
             </ButtonLink>
 
             <a
@@ -102,7 +93,7 @@ export function HeroSection() {
             </a>
           </div>
 
-          {/* Trust */}
+          {/* TRUST */}
           <div className="mt-10 flex flex-wrap gap-6 text-sm text-white/70">
             <span>✔ {t("hero.bullets.ontime")}</span>
             <span>✔ {t("hero.bullets.pricing")}</span>
@@ -111,8 +102,8 @@ export function HeroSection() {
         </div>
       </Container>
 
-      {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2 z-10">
+      {/* DOTS */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {heroImages.map((_, index) => (
           <button
             key={index}

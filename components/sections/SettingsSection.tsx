@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { useLanguage } from "@/components/providers/LanguageProvider";
