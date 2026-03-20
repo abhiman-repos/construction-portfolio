@@ -8,14 +8,17 @@ import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { site } from "@/lib/content/site";
 import { buildMailtoLink, buildTelLink } from "@/lib/links";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
-type NavItem = {
+type menuItems  = {
   href: string;
   label: string;
   sub?: {
-    label: string;
+    label?: string;
     slug?: string;
     href?: string;
+    type?: "custom";
+    component?: React.ReactNode;
   }[];
 };
 
@@ -33,7 +36,7 @@ export function SiteHeader() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  const nav: NavItem[] = [
+  const nav: menuItems [] = [
     { href: "#about", label: t("nav.about") },
     { href: "#projects", label: t("nav.projects") },
     {
@@ -55,6 +58,21 @@ export function SiteHeader() {
         { label: "Get Quote", href: "#quote" },
       ],
     },
+    {
+      href: "#setting",
+      label: t("Setting"),
+      sub: [
+        {
+          type: "custom",
+          component: <LanguageSwitcher />,
+        },
+        {
+          type: "custom",
+          component: <ThemeToggle />,
+        },
+      ],
+    },
+    
   ];
 
   return (
@@ -79,18 +97,25 @@ export function SiteHeader() {
 
               {/* Dropdown */}
               {n.sub && (
-                <div className="absolute left-0 top-full mt-3 w-48 rounded-xl border border-border bg-background shadow-xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
+                <div className="absolute left-0 top-full mt-3 min-w-[220px] rounded-2xl border border-border bg-background shadow-xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 p-2">
                   {n.sub.map((item, i) => {
-                    const href =
-                      "slug" in item
-                        ? `/services/${item.slug}`
-                        : item.href || "#";
+                    if (item.type === "custom") {
+                      return (
+                        <div key={`custom-${i}`} className="px-2 py-2">
+                          {item.component}
+                        </div>
+                      );
+                    }
+
+                    const href = item.slug
+                      ? `/services/${item.slug}`
+                      : item.href || "#";
 
                     return (
                       <Link
-                        key={`${item.label}-${i}`} // ✅ FIXED
+                        key={`${item.label}-${i}`}
                         href={href}
-                        className="block px-4 py-2 text-sm text-foreground hover:bg-accent rounded-lg"
+                        className="block px-3 py-2 text-sm text-foreground hover:bg-accent rounded-lg"
                       >
                         {item.label}
                       </Link>
@@ -103,7 +128,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle className="hidden sm:inline-flex" />
+          
           <button
             type="button"
             className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card text-foreground transition hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60 md:hidden"
@@ -194,17 +219,28 @@ export function SiteHeader() {
                         >
                           <div className="mt-1 space-y-1">
                             {n.sub.map((item, i) => {
-                              const href =
-                                "slug" in item
-                                  ? `/services/${item.slug}`
-                                  : item.href || "#";
+                              // ✅ HANDLE CUSTOM COMPONENT
+                              if (item.type === "custom") {
+                                return (
+                                  <div
+                                    key={`custom-${i}`}
+                                    className="px-4 py-3"
+                                  >
+                                    {item.component}
+                                  </div>
+                                );
+                              }
+
+                              // ✅ HANDLE NORMAL LINKS
+                              const href = item.slug
+                                ? `/services/${item.slug}`
+                                : item.href || "#";
 
                               return (
                                 <Link
                                   key={`${item.label}-${i}`}
                                   href={href}
-                                  onClick={() => setOpen(false)}
-                                  className="block rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition"
+                                  className="block px-4 py-2 text-sm text-foreground hover:bg-accent rounded-lg"
                                 >
                                   {item.label}
                                 </Link>

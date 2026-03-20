@@ -5,13 +5,14 @@ import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { services } from "@/lib/content/home";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import BorderGlow from "../shared/BorderGlow";
 
 export function ServicesSection() {
   const { t } = useLanguage();
 
   return (
     <section id="services" className="py-16 sm:py-20">
-      <Container>
+      <BorderGlow className="p-6 bg-black/40 backdrop-blur-xl">
         <SectionHeading
           eyebrow={t("services.eyebrow")}
           title={t("services.title")}
@@ -52,7 +53,7 @@ export function ServicesSection() {
             );
           })}
         </div>
-      </Container>
+      </BorderGlow >
     </section>
   );
 }

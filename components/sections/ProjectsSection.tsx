@@ -11,21 +11,44 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function ProjectsSection() {
   const [filter, setFilter] = useState<string>("All");
+  const [showAll, setShowAll] = useState(false);
   const { t } = useLanguage();
 
-  const filters = [
+  // 🔥 ALL FILTERS
+  const allFilters = [
     "All",
     "Residential",
+    "Commercial",
     "Institutional",
+    "Industrial",
+    "Interior",
+    "Renovation",
     "Hospital",
-    "MarriageHall",
+    "Educational",
+    "Office",
+    "Retail",
+    "Warehouse",
+    "Villa",
+    "Apartment",
+    "Marriage Hall",
   ];
 
-  // ✅ FILTER LOGIC
+  // 🔥 SHOW ONLY 5 INITIALLY
+  const visibleFilters = showAll
+    ? allFilters
+    : allFilters.slice(0, 5);
+
+  // ✅ SMART FILTER LOGIC (IMPORTANT)
   const filteredProjects =
     filter === "All"
       ? projects
-      : projects.filter((p) => p.type === filter);
+      : projects.filter((p) =>
+          p.type?.toLowerCase().includes(filter.toLowerCase()) ||
+          p.projectType?.toLowerCase().includes(filter.toLowerCase()) ||
+          p.tags?.some((tag) =>
+            tag.toLowerCase().includes(filter.toLowerCase())
+          )
+        );
 
   return (
     <section id="projects" className="py-16 sm:py-20">
@@ -39,7 +62,8 @@ export function ProjectsSection() {
 
         {/* 🔥 FILTER BUTTONS */}
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          {filters.map((f) => (
+
+          {visibleFilters.map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
@@ -49,9 +73,18 @@ export function ProjectsSection() {
                   : "bg-background text-foreground border-border hover:bg-accent"
               }`}
             >
-              {f === "MarriageHall" ? "Marriage Hall" : f}
+              {f}
             </button>
           ))}
+
+          {/* 🔥 SEE MORE BUTTON */}
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="px-4 py-2 rounded-full text-sm border border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black transition-all duration-300"
+          >
+            {showAll ? "See Less ↑" : "See More ↓"}
+          </button>
+
         </div>
 
         {/* 🔥 PROJECT GRID */}
@@ -85,7 +118,6 @@ export function ProjectsSection() {
                   {p.name}
                 </h3>
 
-                {/* ✅ USE shortDescription */}
                 <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
                   {p.shortDescription}
                 </p>

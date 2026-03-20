@@ -9,6 +9,7 @@ import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 import { FloatingWhatsApp } from "@/components/shared/FloatingWhatsApp";
 import { SiteFooter } from "@/components/shared/SiteFooter";
 import { SiteHeader } from "@/components/shared/SiteHeader";
+import BorderGlow from "@/components/shared/BorderGlow";
 
 export default function Home() {
   return (
@@ -22,7 +23,6 @@ export default function Home() {
         <ProjectsSection />
         <ServicesSection />
         <WhyChooseUsSection />
-        <SettingsSection />
       </main>
       <SiteFooter />
       <FloatingWhatsApp />

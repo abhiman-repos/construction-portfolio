@@ -2,10 +2,9 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { ArrowRight, Phone } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { ButtonLink } from "@/components/shared/Button";
-import { buildMailtoLink, buildTelLink } from "@/lib/links";
+import { buildMailtoLink } from "@/lib/links";
 import { site } from "@/lib/content/site";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
@@ -44,7 +43,7 @@ export function HeroSection() {
             fill
             priority={index === 0}
             className={`object-cover object-center transition-all duration-[1200ms] ease-in-out ${
-              isActive ? "opacity-100 scale-105" : "opacity-0 scale-110"
+              isActive ? "opacity-100 scale-110" : "opacity-0 scale-110"
             }`}
           />
         );
@@ -84,13 +83,6 @@ export function HeroSection() {
               {t("hero.cta.consultation")}
             </ButtonLink>
 
-            <a
-              href={buildTelLink()}
-              className="flex items-center justify-center gap-2 rounded-xl border border-white/20 px-6 py-3 text-white hover:bg-white/10"
-            >
-              <Phone className="h-4 w-4" />
-              {t("hero.cta.callNow")}
-            </a>
           </div>
 
           {/* TRUST */}

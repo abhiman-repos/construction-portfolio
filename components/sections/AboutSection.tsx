@@ -12,7 +12,7 @@ export function AboutSection() {
   const { t } = useLanguage();
   return (
     <section id="about" className="py-16 sm:py-20">
-      <Container>
+      <Container >
         <div className="grid items-center gap-10 lg:gap-16">
           <div>
             <SectionHeading
