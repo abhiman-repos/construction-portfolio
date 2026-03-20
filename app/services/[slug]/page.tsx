@@ -21,12 +21,7 @@ export default async function ServicePage({
       {/* 🔥 HERO (SPLIT) */}
       <section className="relative py-24">
         <div className="absolute inset-0">
-          <Image
-            src="/hero.jpeg"
-            alt=""
-            fill
-            className="object-cover opacity-30"
-          />
+ 
         </div>
 
         <Container className="relative z-10">

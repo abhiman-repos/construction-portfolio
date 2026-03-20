@@ -31,7 +31,7 @@ export function HeroSection() {
   }, [heroImages.length]);
 
   return (
-    <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
+    <section className="relative h-[50vh] min-h-[500px] w-full overflow-hidden">
       {/* SLIDER */}
       {heroImages.map((src, index) => {
         const isActive = index === current;
@@ -94,11 +94,7 @@ export function HeroSection() {
           </div>
 
           {/* TRUST */}
-          <div className="mt-10 flex flex-wrap gap-6 text-sm text-white/70">
-            <span>✔ {t("hero.bullets.ontime")}</span>
-            <span>✔ {t("hero.bullets.pricing")}</span>
-            <span>✔ {t("hero.bullets.finishing")}</span>
-          </div>
+
         </div>
       </Container>
 
@@ -108,8 +104,8 @@ export function HeroSection() {
           <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`h-2 rounded-full transition-all ${
-              index === current ? "w-6 bg-amber-400" : "w-2 bg-white/50"
+            className={`rounded-full transition-all ${
+              index === current ? "w-6 bg-amber-500" : "w-2 bg-white/50"
             }`}
           />
         ))}
