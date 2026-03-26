@@ -1,6 +1,6 @@
 export const site = {
   brand: {
-    name: "Arti Construction & Infrastructure Pvt. Ltd.",
+    name: "RP Infrastructure",
     tagline: "Building Dreams with Precision & Trust",
     description:
       "Delivering high-quality residential & commercial construction solutions with transparent pricing, skilled execution, and delivery.",
